@@ -1,3 +1,7 @@
+let firstNumber = '';
+let operator;
+let secondNumber = '';
+
 function add(a, b){
     return Number(a) + Number(b);
 }
@@ -35,4 +39,19 @@ function operate(a, operator,c){
 }
 
 
-console.log(operate('2', '/', '0'));
+// console.log(operate('2', '/', '0'));
+
+let display = document.querySelector('.display');
+
+let buttons = document.querySelectorAll('.btn');
+
+buttons.forEach(button =>{
+    button.addEventListener('click', (e) =>{
+        if(firstNumber.length < 10){
+            firstNumber += button.innerText;
+            display.innerText = firstNumber;
+            console.log(firstNumber.length);
+        }
+        
+    });
+});
