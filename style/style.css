@@ -59,7 +59,7 @@
   align-items: center;
 }
 
-.functn-btn {
+.functn-btn-AC, .functn-btn-clr {
   background-color: skyblue;
   height: 80%;
   width: 30%;
