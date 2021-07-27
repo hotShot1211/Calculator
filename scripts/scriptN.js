@@ -29,7 +29,7 @@ function operate(a, operator, c) {
     console.log(a);
     console.log(operator);
     console.log(c);
-
+  
     if (operator == '+') {
         return add(a, c);
     }
@@ -86,12 +86,18 @@ buttons.forEach(button => {
             else {
                 oldOperator = currOperator;
                 currOperator = button.innerText;
-                ans = operate(firstNumber, oldOperator, secondNumber);
-                console.log(ans);
-                display.innerText = ans;
-                secondNumber = '';
+                if(secondNumber != ''){
 
-                firstNumber = ans;
+                    ans = operate(firstNumber, oldOperator, secondNumber);
+                    console.log(ans);
+                    display.innerText = ans;
+                    secondNumber = '';
+    
+                    firstNumber = ans;
+                }
+                else{
+                    display.innerText = 'answer second number';
+                }
 
             }
         }
