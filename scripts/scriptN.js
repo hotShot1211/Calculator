@@ -21,7 +21,7 @@ function divide(a, b) {
         return Number(a) / Number(b);
     }
     else {
-        return 'You are better thant his!';
+        return 'You are better than this!';
     }
 }
 
