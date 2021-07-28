@@ -21,11 +21,14 @@ function divide(a, b) {
         return Number(a) / Number(b);
     }
     else {
-        return 'You are better thant his!';
+        return 'You are better than this!';
     }
 }
 
 function operate(a, operator, c) {
+    console.log(a);
+    console.log(operator);
+    console.log(c);
 
     if (operator == '+') {
         return add(a, c);
@@ -40,82 +43,92 @@ function operate(a, operator, c) {
         return divide(a, c);
     }
     if (operator == '=') {
-        firstNumber= '';
+
         return a;
     }
 }
 
+function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('pressed');
+}
 
-// console.log(operate('2', '/', '0'));
 
 let display = document.querySelector('.display');
 
-let buttons = document.querySelectorAll('.btn');
+let buttons = document.querySelectorAll('.btn-cntnr div');
+
 
 buttons.forEach(button => {
     button.addEventListener('click', () => {
-        if (currOperator == '') {
-            firstNumber += button.innerText;
-            display.innerText = firstNumber;
+        let currClass = button.getAttribute('class');
+        if (currClass == 'btn') {
+            if (currOperator == '=') {
+                firstNumber = '';
+                currOperator = '';
+                oldOperator = ''
+                secondNumber = '';
+                ans = '';
+            }
+            if (currOperator == '') {
+                firstNumber += button.innerText;
+                display.innerText = firstNumber;
+                console.log('x:' + firstNumber);
+            }
+            else {
+                display.innerText = '';
+                secondNumber += button.innerText;
+                display.innerText = secondNumber;
+                console.log('y:' + secondNumber);
+            }
         }
         else {
-            display.innerText = '';
-            secondNumber += button.innerText;
-            display.innerText = secondNumber;
-
-        }
-    });
-});
-
-
-let operatorKeys = document.querySelectorAll('.operator');
-
-operatorKeys.forEach(operatorKey => {
-    operatorKey.addEventListener('click', (e) => {
-        // let x = (e.currentTarget).getAttribute('class');
-        // console.log(x);
-        oldOperator = currOperator;
-        currOperator = operatorKey.innerText;
-        if (firstNumber != '' && secondNumber != '' && oldOperator != '') {
-            ans = operate(firstNumber, oldOperator, secondNumber);
-            display.innerText = ans;
-            if(currOperator != '='){
-                firstNumber = ans;
-                console.log(ans);
-                ans = '';
-                secondNumber = '';
+            if (firstNumber == '') {
+                return;
             }
-            else{
-                console.log('viva la vida')
-                let currnTrgt = (e.currentTarget).getAttribute('class');
-                console.log(currnTrgt);
-                if(currnTrgt == 'operator'){
-                    firstNumber = ans;
+            if (currOperator == '') {
+                currOperator = button.innerText;
+            }
+            else {
+                oldOperator = currOperator;
+                currOperator = button.innerText;
+                if (secondNumber != '') {
+
+                    ans = operate(firstNumber, oldOperator, secondNumber);
                     console.log(ans);
-                    ans = '';
+                    display.innerText = ans;
                     secondNumber = '';
-                    console.log('hi');
+
+                    firstNumber = ans;
                 }
-                else{
-                    firstNumber = '';
-                    currOperator = '';
-                    oldOperator = ''
-                    secondNumber = '';
-                    ans = '';
+                else {
+                    // display.innerText = 'enter second number';
+                    return;
                 }
+
             }
         }
 
     })
 })
 
-let clear = document.querySelector('.functn-btn-AC');
 
-clear.addEventListener('click', () => {
+let ac = document.querySelector('.functn-btn-ac');
+ac.addEventListener('click', () => {
     firstNumber = '';
     currOperator = '';
     oldOperator = ''
     secondNumber = '';
     ans = '';
     display.innerText = '0';
+});
+
+
+let cnsl = document.querySelector('.functn-btn-del');
+cnsl.addEventListener('click', () => {
+    console.log(firstNumber);
+    console.log(oldOperator);
+    console.log(secondNumber);
+    console.log(currOperator);
 })
+
