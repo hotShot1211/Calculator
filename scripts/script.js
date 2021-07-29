@@ -3,6 +3,7 @@ let currOperator = '';
 let oldOperator = ''
 let secondNumber = '';
 let ans = '';
+let clrOn = false;
 
 function add(a, b) {
     return Number(a) + Number(b);
@@ -71,11 +72,15 @@ buttons.forEach(button => {
                 ans = '';
             }
             if (currOperator == '') {
+                clrOn = true;
                 firstNumber += button.innerText;
                 display.innerText = firstNumber;
                 console.log('x:' + firstNumber);
+               
+                console.log(firstNumber.slice(0, firstNumber.length - 1));
             }
             else {
+                clrOn = false;
                 display.innerText = '';
                 secondNumber += button.innerText;
                 display.innerText = secondNumber;
@@ -130,5 +135,16 @@ cnsl.addEventListener('click', () => {
     console.log(oldOperator);
     console.log(secondNumber);
     console.log(currOperator);
+    let newEntry = '';
+    if(clrOn){
+        newEntry = firstNumber.slice(0 , firstNumber.length - 1);
+        firstNumber = newEntry;
+        display.innerText = firstNumber;
+    }
+    else{
+        newEntry = secondNumber.slice(0 , secondNumber.length - 1);
+        secondNumber = newEntry;
+        display.innerText = newEntry;
+    }
 })
 
