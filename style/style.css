@@ -80,3 +80,15 @@
 .operator {
   background-color: #B97A95;
 }
+
+.btn:hover{
+  background-color: #e0a1a1;;
+}
+
+.operator:hover{
+  background-color: #dd96b5;
+}
+
+.functn-btn-cntnr div:hover{
+  background-color: #d6a9c5;
+}

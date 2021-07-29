@@ -41,7 +41,7 @@ function operate(a, operator, c) {
         return multiply(a, c);
     }
     if (operator == '/') {
-        return divide(a, c);
+        return divide(a, c).toFixed(5);
     }
     if (operator == '=') {
 
